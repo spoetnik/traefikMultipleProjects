@@ -1,0 +1,15 @@
+version: '3'
+  
+services:
+    nginx:
+        image: httpd:2.4.46-alpine
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.project2.rule=Host(`project2.local`)"
+            - "traefik.http.routers.project2.entrypoint=web"
+        networks:
+            - traefik
+networks:
+    traefik:
+        external:
+            name: traefik_proxy
